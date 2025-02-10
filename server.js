@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import http from 'http';
 import { Server } from 'socket.io';
-import { socketMiddleware } from './modules/socketMiddleware.js';
+
 import authRoutes from "./routes/auth.js";  
 import eventRoutes from "./routes/event.js";
 

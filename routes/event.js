@@ -115,6 +115,23 @@ router.put("/update/:eventId", protect, async (req, res) => {
     }
 });
 
+// Get Events the User is Attending
+router.get("/registered-events", protect, async (req, res) => {
+    try {
+        const userId = req.user._id;
+        const events = await EventModel.find({ attendees: userId })
+            .populate("creator", "username email")
+            .populate("attendees", "username email")
+            .lean();
+
+        res.status(200).json(events);
+    } catch (error) {
+        console.error("Error fetching registered events:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
+
 // Delete Event (Only Creator)
 router.delete("/:eventId", protect, async (req, res) => {
     const { eventId } = req.params;
