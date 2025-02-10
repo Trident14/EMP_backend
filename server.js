@@ -11,7 +11,7 @@ import eventRoutes from "./routes/event.js";
 dotenv.config();
 
 const app = express();
-const PORT = 4080;
+const PORT = process.env.PORT || 3000;
 
 // ✅ Create HTTP Server
 const server = http.createServer(app);
