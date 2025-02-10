@@ -35,7 +35,14 @@ mongoose.connect(process.env.DBKEY)
     .catch(err => console.error("❌ MongoDB connection error:", err));
 
 // ✅ Middleware
-app.use(cors());
+app.use(
+    cors({
+      origin: "*", // ✅ Allows requests from any domain
+      methods: ["GET", "POST", "PUT", "DELETE"], // Allowed methods
+      allowedHeaders: ["Content-Type", "Authorization"], // Allow necessary headers
+    })
+  );
+  
 app.use(express.json());
 
 // ✅ Protected Route
